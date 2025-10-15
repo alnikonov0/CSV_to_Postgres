@@ -21,13 +21,6 @@ class ETL:
             port="5432"
         )
 
-    def sql_extract(self, query):
-        with self.conn.cursor() as cursor:
-            cursor.execute(query)
-            rows = cursor.fetchall()
-            cols = [desc[0] for desc in cursor.description]
-            return pd.DataFrame(rows, columns=cols)
-
     def extract(self, file_path, batch_size):
         with open(file_path) as f:
             batch = []
